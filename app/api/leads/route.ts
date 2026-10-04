@@ -1,5 +1,5 @@
 import { getAdminSessionFromRequest, isSameOrigin } from "@/app/admin-auth";
-import { createLead, deleteLead, listLeads, updateLead } from "@/db";
+import { createLead, deleteLead, listLeads, updateLead, type LeadChanges } from "@/db";
 
 const statuses = new Set(["new", "qualified", "package_sent", "follow_up", "booked", "not_interested"]);
 const traineeTypes = new Set(["kids", "adults", "group", "recommend"]);
@@ -70,7 +70,7 @@ export async function PATCH(request: Request) {
     const id = Number(payload.id);
     if (!Number.isInteger(id) || id <= 0) return Response.json({ error: "Invalid lead update" }, { status: 400 });
 
-    const changes: Record<string, string | number | null> = { updatedAt: new Date().toISOString() };
+    const changes: LeadChanges = { updatedAt: new Date().toISOString() };
 
     if ("name" in payload) {
       const name = clean(payload.name, 100);
