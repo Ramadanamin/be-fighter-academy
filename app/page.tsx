@@ -85,8 +85,8 @@ export default function Home() {
     {
       id: "starter_private",
       name: t("بداية", "STARTER"),
-      price: "5,600",
-      sessions: t("8 حصص برايفت", "8 private sessions"),
+      price: "6,000",
+      sessions: t("6 حصص برايفت — 1,000 جنيه للحصة تقريبًا", "6 private sessions — approx. 1,000 EGP/session"),
       description: t("بداية مناسبة لتجربة التدريب البرايفت وبناء روتين واضح.", "A focused introduction to private coaching and a consistent routine."),
       features: [t("تقييم مبدئي", "Initial assessment"), t("خطة تدريب أساسية", "Basic training plan"), t("تدريب في مكانك", "Training at your location"), t("مرونة في المواعيد", "Flexible scheduling"), t("متابعة أساسية للتقدم", "Basic progress monitoring")],
       cta: t("ابدأ تجربتك", "Start your experience"),
@@ -94,8 +94,8 @@ export default function Home() {
     {
       id: "private_coaching",
       name: t("انتظام", "CONSISTENCY"),
-      price: "7,800",
-      sessions: t("12 حصة برايفت — 3 أيام أسبوعيًا", "12 private sessions — 3 days/week"),
+      price: "7,000",
+      sessions: t("8 حصص برايفت — 875 جنيه للحصة تقريبًا", "8 private sessions — approx. 875 EGP/session"),
       description: t("للي عايز التدريب يبقى جزء ثابت من روتينه بمتابعة منتظمة.", "For anyone ready to make private coaching a consistent part of their routine."),
       features: [t("تقييم مبدئي", "Initial assessment"), t("خطة تدريب مخصصة", "Personalized training plan"), t("متابعة للتقدم وتصحيح للتكنيك", "Progress monitoring & technique correction"), t("مرونة في المواعيد", "Flexible scheduling"), t("تدريب في مكانك", "Training at your location"), t("متابعة دورية", "Regular progress follow-up")],
       cta: t("اسأل عن باقة الانتظام", "Start private coaching"),
@@ -105,7 +105,7 @@ export default function Home() {
       id: "signature_coaching",
       name: t("متابعة موسّعة", "EXTENDED FOLLOW-UP"),
       price: "10,000",
-      sessions: t("12 حصة برايفت — 3 أيام أسبوعيًا", "12 private sessions — 3 days/week"),
+      sessions: t("12 حصة برايفت — 833 جنيه للحصة تقريبًا", "12 private sessions — approx. 833 EGP/session"),
       description: t("تجربة Premium بمتابعة أعمق ودعم مباشر من المدرب.", "A premium coaching experience with deeper monitoring and direct support."),
       features: [t("تقييم شامل وبرنامج مخصص", "Full assessment & personalized programme"), t("متابعة متقدمة ولقاء أسبوعي", "Advanced monitoring & weekly check-ins"), t("تقرير للتقدم", "Progress report"), t("إرشادات نشاط بسيطة بين الحصص", "Simple activity guidance between sessions"), t("مكالمة متابعة أسبوعية 15 دقيقة", "Weekly 15-minute follow-up call"), t("دعم مباشر من المدرب", "Direct coach support"), t("تقرير مكتوب في نهاية الباقة", "Written end-of-package progress report")],
       cta: t("اعرف تفاصيل المتابعة الموسعة", "Start signature coaching"),
@@ -113,9 +113,9 @@ export default function Home() {
     },
   ];
   const packageLabels: Record<string, string> = {
-    starter_private: "Starter Private — 5,600 EGP",
-    private_coaching: "انتظام — 7,800 EGP",
-    signature_coaching: "متابعة موسعة — 10,000 EGP",
+    starter_private: "6 حصص — 6,000 EGP",
+    private_coaching: "8 حصص — 7,000 EGP",
+    signature_coaching: "12 حصة — 10,000 EGP",
     private_circle: t("العيلة والمجموعة — 16,000–24,000 جنيه", "Family & groups — 16,000–24,000 EGP"),
   };
   const programs = [
