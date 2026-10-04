@@ -1,0 +1,18 @@
+.shell { min-height: 100vh; display: grid; place-items: center; padding: 30px 16px; background: radial-gradient(circle at 50% 0, #1d2e31 0, #080808 40%, #030303 100%); color: #f7f7f7; font-family: "Cairo", Tahoma, Arial, sans-serif; }
+.panel { width: min(460px, 100%); padding: 34px; border: 1px solid #343434; border-radius: 22px; background: #101010e8; box-shadow: 0 30px 80px #0009; }
+.logo { display: block; width: 138px; margin: 0 auto 18px; }
+.logo img { display: block; width: 100%; height: auto; }
+.badge { display: flex; align-items: center; justify-content: center; gap: 8px; width: fit-content; margin: 0 auto 18px; padding: 8px 13px; border: 1px solid #20d9d250; border-radius: 99px; color: #59e8e3; background: #20d9d210; font-size: .85rem; font-weight: 800; }
+.badge svg { width: 17px; height: 17px; }
+.panel h1 { margin: 0; text-align: center; font-size: clamp(1.8rem, 7vw, 2.5rem); font-weight: 900; }
+.panel > p { margin: 10px auto 24px; max-width: 340px; color: #a8a8a8; line-height: 1.8; text-align: center; }
+.panel form { display: grid; gap: 17px; }
+.panel label { display: grid; gap: 8px; font-size: .95rem; font-weight: 800; }
+.panel input { height: 50px; border-color: #454545; background: #080808; color: #fff; font-size: 1rem; }
+.panel button { min-height: 52px; margin-top: 4px; background: #ffce0a; color: #050505; font-weight: 900; }
+.panel button:hover { background: #20d9d2; }
+.panel output { min-height: 22px; color: #ff9d9d; text-align: center; font-size: .88rem; }
+.back { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 18px; color: #a8a8a8; font-size: .9rem; }
+.back:hover { color: #20d9d2; }
+.back svg { width: 17px; }
+@media (max-width: 520px) { .panel { padding: 27px 20px; border-radius: 18px; } }
