@@ -1,7 +1,5 @@
-import { and, desc, eq, like, or, type SQL } from "drizzle-orm";
 import { getAdminSessionFromRequest, isSameOrigin } from "@/app/admin-auth";
-import { getDb } from "@/db";
-import { leads } from "@/db/schema";
+import { createLead, deleteLead, listLeads, updateLead } from "@/db";
 
 const statuses = new Set(["new", "qualified", "package_sent", "follow_up", "booked", "not_interested"]);
 const traineeTypes = new Set(["kids", "adults", "group", "recommend"]);
@@ -23,10 +21,7 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const status = clean(url.searchParams.get("status"), 40);
     const query = clean(url.searchParams.get("q"), 100);
-    const conditions: SQL[] = [];
-    if (statuses.has(status)) conditions.push(eq(leads.status, status));
-    if (query) conditions.push(or(like(leads.name, `%${query}%`), like(leads.phone, `%${query}%`), like(leads.area, `%${query}%`))!);
-    const rows = await getDb().select().from(leads).where(conditions.length ? and(...conditions) : undefined).orderBy(desc(leads.createdAt), desc(leads.id)).limit(500);
+    const rows = listLeads(statuses.has(status) ? status : undefined, query || undefined);
     return Response.json({ leads: rows }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     console.error("CRM lead list failed", error);
@@ -47,7 +42,7 @@ export async function POST(request: Request) {
     const trainingType = clean(payload.trainingType, 30);
     const area = clean(payload.area, 30);
     const packageChoice = clean(payload.packageChoice, 40);
-    const [lead] = await getDb().insert(leads).values({
+    const lead = createLead({
       name,
       phone,
       traineeType: traineeTypes.has(traineeType) ? traineeType : "recommend",
@@ -60,7 +55,7 @@ export async function POST(request: Request) {
       packageChoice: packages.has(packageChoice) ? packageChoice : null,
       notes: clean(payload.notes, 1500),
       language: payload.language === "en" ? "en" : "ar",
-    }).returning({ id: leads.id, createdAt: leads.createdAt });
+    });
     return Response.json({ lead }, { status: 201 });
   } catch (error) {
     console.error("Lead capture failed", error);
@@ -74,7 +69,9 @@ export async function PATCH(request: Request) {
     const payload = await request.json() as Record<string, unknown>;
     const id = Number(payload.id);
     if (!Number.isInteger(id) || id <= 0) return Response.json({ error: "Invalid lead update" }, { status: 400 });
-    const changes: Partial<typeof leads.$inferInsert> = { updatedAt: new Date().toISOString() };
+
+    const changes: Record<string, string | number | null> = { updatedAt: new Date().toISOString() };
+
     if ("name" in payload) {
       const name = clean(payload.name, 100);
       if (name.length < 2) return Response.json({ error: "Name is required" }, { status: 400 });
@@ -117,7 +114,8 @@ export async function PATCH(request: Request) {
     if ("followUpAt" in payload) changes.followUpAt = clean(payload.followUpAt, 40) || null;
     if ("crmNotes" in payload) changes.crmNotes = clean(payload.crmNotes, 3000);
     if (payload.markContacted) changes.lastContactedAt = new Date().toISOString();
-    const [lead] = await getDb().update(leads).set(changes).where(eq(leads.id, id)).returning();
+
+    const lead = updateLead(id, changes);
     if (!lead) return Response.json({ error: "Lead not found" }, { status: 404 });
     return Response.json({ lead });
   } catch (error) {
@@ -131,9 +129,8 @@ export async function DELETE(request: Request) {
     if (!isSameOrigin(request) || !await requireAdmin(request)) return Response.json({ error: "Unauthorized" }, { status: 401 });
     const id = Number(new URL(request.url).searchParams.get("id"));
     if (!Number.isInteger(id) || id <= 0) return Response.json({ error: "Invalid lead" }, { status: 400 });
-    const [deleted] = await getDb().delete(leads).where(eq(leads.id, id)).returning({ id: leads.id });
-    if (!deleted) return Response.json({ error: "Lead not found" }, { status: 404 });
-    return Response.json({ deleted: true, id: deleted.id });
+    if (!deleteLead(id)) return Response.json({ error: "Lead not found" }, { status: 404 });
+    return Response.json({ deleted: true, id });
   } catch (error) {
     console.error("CRM lead deletion failed", error);
     return Response.json({ error: "Unable to delete this lead" }, { status: 500 });
