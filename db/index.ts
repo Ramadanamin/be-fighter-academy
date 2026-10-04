@@ -2,6 +2,7 @@ import "server-only";
 
 import { mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { homedir } from "node:os";
 import { DatabaseSync } from "node:sqlite";
 
 export type LeadRecord = {
@@ -28,7 +29,7 @@ export type LeadRecord = {
 };
 
 type LeadInput = Omit<LeadRecord, "id" | "source" | "status" | "followUpAt" | "crmNotes" | "lastContactedAt" | "createdAt" | "updatedAt">;
-type LeadChanges = Partial<Omit<LeadRecord, "id" | "createdAt">>;
+export type LeadChanges = Partial<Omit<LeadRecord, "id" | "createdAt">>;
 
 type AuthAttempt = {
   key: string;
@@ -42,7 +43,7 @@ let database: DatabaseSync | null = null;
 
 function dbPath() {
   const configured = process.env.CRM_DB_PATH?.trim();
-  return configured || join(process.cwd(), "storage", "be-fighter-crm.sqlite");
+  return configured || join(homedir(), ".be-fighter", "be-fighter-crm.sqlite");
 }
 
 function getDb() {
