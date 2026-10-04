@@ -1,17 +1,12 @@
-import { eq } from "drizzle-orm";
-import { getDb } from ".";
-import { crmSettings } from "./schema";
+import { getCrmSetting, setCrmSettingIfMissing } from ".";
 
 const OWNER_KEY = "owner_user_id";
 
 export async function claimCrmOwnership(userId: string) {
-  const db = getDb();
-  await db.insert(crmSettings).values({ key: OWNER_KEY, value: userId }).onConflictDoNothing();
+  setCrmSettingIfMissing(OWNER_KEY, userId);
   return isCrmOwner(userId);
 }
 
 export async function isCrmOwner(userId: string) {
-  const db = getDb();
-  const [setting] = await db.select({ value: crmSettings.value }).from(crmSettings).where(eq(crmSettings.key, OWNER_KEY)).limit(1);
-  return setting?.value === userId;
+  return getCrmSetting(OWNER_KEY) === userId;
 }
