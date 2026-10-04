@@ -1,10 +1,7 @@
 import "server-only";
 
 import { headers } from "next/headers";
-import { env } from "cloudflare:workers";
-import { eq } from "drizzle-orm";
-import { getDb } from "@/db";
-import { adminAuthAttempts } from "@/db/schema";
+import { deleteAuthAttempt, getAuthAttempt, upsertAuthAttempt } from "@/db";
 
 const COOKIE_NAME = "bf_admin_session";
 const SESSION_MAX_AGE_SECONDS = 60 * 60 * 12;
@@ -16,7 +13,7 @@ const decoder = new TextDecoder();
 type AdminSession = { username: string; expiresAt: number };
 
 function runtimeValue(key: "CRM_ADMIN_USERNAME" | "CRM_ADMIN_PASSWORD_HASH" | "CRM_SESSION_SECRET") {
-  return (env as unknown as Record<string, string | undefined>)[key] || "";
+  return process.env[key] || "";
 }
 
 function base64UrlEncode(bytes: Uint8Array) {
@@ -127,14 +124,14 @@ export function isSameOrigin(request: Request) {
 }
 
 async function attemptKey(request: Request) {
-  const address = request.headers.get("cf-connecting-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const address = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || request.headers.get("x-real-ip") || "unknown";
   const digest = await crypto.subtle.digest("SHA-256", encoder.encode(address));
   return base64UrlEncode(new Uint8Array(digest));
 }
 
 export async function loginAttemptAllowed(request: Request) {
   const key = await attemptKey(request);
-  const [attempt] = await getDb().select().from(adminAuthAttempts).where(eq(adminAuthAttempts.key, key)).limit(1);
+  const attempt = getAuthAttempt(key);
   if (!attempt) return true;
   return !attempt.lockedUntil || new Date(attempt.lockedUntil).getTime() <= Date.now();
 }
@@ -142,18 +139,15 @@ export async function loginAttemptAllowed(request: Request) {
 export async function recordLoginFailure(request: Request) {
   const key = await attemptKey(request);
   const now = Date.now();
-  const [existing] = await getDb().select().from(adminAuthAttempts).where(eq(adminAuthAttempts.key, key)).limit(1);
+  const existing = getAuthAttempt(key);
   const windowStarted = existing ? new Date(existing.windowStartedAt).getTime() : 0;
   const withinWindow = now - windowStarted < LOGIN_WINDOW_MS;
   const attemptCount = withinWindow ? (existing?.attemptCount || 0) + 1 : 1;
   const windowStartedAt = new Date(withinWindow ? windowStarted : now).toISOString();
   const lockedUntil = attemptCount >= MAX_LOGIN_ATTEMPTS ? new Date(now + LOGIN_WINDOW_MS).toISOString() : null;
-  await getDb().insert(adminAuthAttempts).values({ key, attemptCount, windowStartedAt, lockedUntil, updatedAt: new Date(now).toISOString() }).onConflictDoUpdate({
-    target: adminAuthAttempts.key,
-    set: { attemptCount, windowStartedAt, lockedUntil, updatedAt: new Date(now).toISOString() },
-  });
+  upsertAuthAttempt({ key, attemptCount, windowStartedAt, lockedUntil, updatedAt: new Date(now).toISOString() });
 }
 
 export async function clearLoginFailures(request: Request) {
-  await getDb().delete(adminAuthAttempts).where(eq(adminAuthAttempts.key, await attemptKey(request)));
+  deleteAuthAttempt(await attemptKey(request));
 }
