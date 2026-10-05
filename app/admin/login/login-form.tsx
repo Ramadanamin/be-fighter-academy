@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 import { ArrowLeft, LockKeyhole, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,7 +32,7 @@ export default function LoginForm() {
   }
 
   return <main className={styles.shell} dir="rtl"><section className={styles.panel}>
-    <a className={styles.logo} href="/"><img src="/media/be-fighter-logo.png" alt="Be Fighter Academy" /></a>
+    <Link className={styles.logo} href="/"><img src="/media/be-fighter-logo.png" alt="Be Fighter Academy" /></Link>
     <span className={styles.badge}><ShieldCheck /> منطقة إدارة مؤمّنة</span>
     <h1>دخول إدارة Be Fighter</h1>
     <p>الصفحة دي مخصصة لإدارة طلبات العملاء ومتابعتها فقط.</p>
@@ -41,6 +42,6 @@ export default function LoginForm() {
       <Button type="submit" disabled={status === "loading"}><LockKeyhole />{status === "loading" ? "جاري التحقق…" : "دخول لوحة الإدارة"}</Button>
       <output aria-live="polite">{status === "error" ? message : ""}</output>
     </form>
-    <a className={styles.back} href="/"><ArrowLeft /> الرجوع للموقع</a>
+    <Link className={styles.back} href="/"><ArrowLeft /> الرجوع للموقع</Link>
   </section></main>;
 }
