@@ -4,7 +4,7 @@ import styles from "./kids.module.css";
 const WA="201001110897";
 const VODAFONE_CASH="01001110897";
 const INSTAPAY_LINK="https://ipn.eg/S/ramadan.morgan/instapay/8lgrvJ";
-const COACH="/assets/coach-ramadan.webp";
+const COACH="/media/ramadan-coach-cutout.png";
 const wa=(t:string)=>`https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
 const benefits=[["ثقة بالنفس","وقفة أوضح وتصرف أهدى تحت الضغط."],["دفاع عن النفس","حركة ومسافة وحماية بشكل آمن."],["انضباط أعلى","تدريب تدريجي وروتين واضح."],["تركيز أفضل","تمارين حركة ورد فعل مناسبة للسن."],["جسم أقوى","لياقة وحركة أفضل بشكل تدريجي."]];
 const steps=[["01","التقييم","نفهم مستوى الطفل وهدف ولي الأمر."],["02","بناء الأساس","وقفة، حركة، حراسة وثقة."],["03","التطبيق","Drills ومواقف بسيطة تناسب السن."],["04","المتابعة","نراجع التقدم ونعدّل الخطة."]];
