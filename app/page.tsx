@@ -136,7 +136,7 @@ export default function Home() {
     [t("التدريب متاح فين؟", "Which areas do you cover?"), t("مدينتي، الرحاب، الشروق، كمباوند الجولف والديار. لو في منطقة قريبة مش مذكورة، ابعت موقعك وهنأكد لك إمكانية الخدمة والمواعيد.", "Madinaty, Al Rehab, El Shorouk, Golf Compound and Al Diar. For another nearby area, send your location and we’ll confirm availability and session times.")],
     [t("أختار أنهي باقة؟", "Which package should I choose?"), t("باقة بداية فيها 8 حصص بـ5,600 جنيه. انتظام فيها 12 حصة بـ7,800 جنيه. متابعة موسعة فيها 12 حصة بـ10,000 جنيه مع تقرير ومكالمة متابعة أسبوعية. وللأسرة أو المجموعة الخاصة فيه باقات لـ2 أو 3 أو 4 أفراد.", "Starter includes 8 sessions for 5,600 EGP. Consistency includes 12 for 7,800 EGP. Extended follow-up includes 12 for 10,000 EGP with a report and weekly check-in. Family packages are available for groups of two, three or four.")],
   ];
-  const navItems = [[t("البرامج", "Programmes"), "#programs"], [t("طريقتنا", "How it works"), "#method"], [t("الباقات", "Packages"), "#packages"], [t("المدربين", "Coaches"), "#coaches"], [t("الجاردن", "Garden training"), "#garden"], [t("الأسئلة", "FAQ"), "#faq"]];
+  const navItems = [[t("برنامج الأطفال", "Kids"), "/kids"], [t("البرامج", "Programmes"), "#programs"], [t("طريقتنا", "How it works"), "#method"], [t("الباقات", "Packages"), "#packages"], [t("المدربين", "Coaches"), "#coaches"], [t("الجاردن", "Garden training"), "#garden"], [t("الأسئلة", "FAQ"), "#faq"]];
   const inquiry = t("أهلًا Be Fighter Academy، عايز أعرف البرنامج المناسب وتكلفة التدريب البرايفت في منطقتي.", "Hi Be Fighter Academy, I’d like a suitable private training programme and a quote for my area.");
 
   async function submitBooking(event: FormEvent<HTMLFormElement>) {
