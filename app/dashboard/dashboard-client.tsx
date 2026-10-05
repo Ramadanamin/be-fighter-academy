@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { ArrowRight, CalendarClock, ClipboardList, LogOut, MessageCircle, Pencil, Plus, RefreshCw, Save, Search, Trash2, UserCheck, UsersRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -72,14 +73,18 @@ export default function DashboardClient({ displayName }: { displayName: string }
     }
   }
 
-  useEffect(() => { void loadLeads(); }, []);
+  useEffect(() => {
+    const timer = window.setTimeout(() => { void loadLeads(); }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const visibleLeads = useMemo(() => {
     const needle = search.trim().toLowerCase();
     return leads.filter(lead => (statusFilter === "all" || lead.status === statusFilter) && (!needle || [lead.name, lead.phone, areaLabels[lead.area], packageLabels[lead.packageChoice || ""], lead.goal].join(" ").toLowerCase().includes(needle)));
   }, [leads, search, statusFilter]);
 
-  const dueCount = leads.filter(lead => lead.followUpAt && new Date(lead.followUpAt).getTime() <= Date.now() && !["booked", "not_interested"].includes(lead.status)).length;
+  const now = useMemo(() => new Date().getTime(), [leads]);
+  const dueCount = leads.filter(lead => lead.followUpAt && new Date(lead.followUpAt).getTime() <= now && !["booked", "not_interested"].includes(lead.status)).length;
   const metrics = [
     { label: "إجمالي الطلبات", value: leads.length, icon: ClipboardList },
     { label: "طلبات جديدة", value: leads.filter(lead => lead.status === "new").length, icon: UsersRound },
@@ -134,7 +139,7 @@ export default function DashboardClient({ displayName }: { displayName: string }
   function openWhatsApp(lead: Lead) { window.open(whatsappLink(lead.phone), "_blank", "noopener,noreferrer"); void saveLead(lead, true); }
 
   return <main className={styles.shell} dir="rtl">
-    <header className={styles.header}><div className={styles.headerInner}><a href="/" className={styles.brand}><img src="/media/be-fighter-logo.png" alt="Be Fighter" /><span><b>Be Fighter CRM</b><small>لوحة متابعة العملاء</small></span></a><div className={styles.owner}><span>مرحبًا، {displayName}</span><Button asChild variant="outline"><a href="/"><ArrowRight />الموقع الرئيسي</a></Button><Button variant="outline" onClick={() => void logout()}><LogOut />خروج</Button></div></div></header>
+    <header className={styles.header}><div className={styles.headerInner}><Link href="/" className={styles.brand}><img src="/media/be-fighter-logo.png" alt="Be Fighter" /><span><b>Be Fighter CRM</b><small>لوحة متابعة العملاء</small></span></Link><div className={styles.owner}><span>مرحبًا، {displayName}</span><Button asChild variant="outline"><Link href="/"><ArrowRight />الموقع الرئيسي</Link></Button><Button variant="outline" onClick={() => void logout()}><LogOut />خروج</Button></div></div></header>
     <div className={styles.dashboard}>
       <section className={styles.titleRow}><div><p>PRIVATE COACHING OPERATIONS</p><h1>كل طلب. وخطوة المتابعة الجاية.</h1><span>طلبات الموقع بتظهر هنا تلقائيًا، وتقدر تضيف أو تعدّل أو تحذف أي عميل.</span></div><div className={styles.titleActions}><Button onClick={() => setEditor({ ...emptyDraft })}><Plus />إضافة عميل</Button><Button onClick={() => void loadLeads()} variant="outline" disabled={loading}><RefreshCw className={loading ? styles.spin : ""} />تحديث</Button></div></section>
       <section className={styles.metrics}>{metrics.map(item => { const Icon = item.icon; return <article key={item.label}><span><Icon /></span><div><small>{item.label}</small><b>{item.value}</b></div></article>; })}</section>
