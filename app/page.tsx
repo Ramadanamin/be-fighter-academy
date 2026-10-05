@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState, MouseEvent } from "react";
-import { ArrowLeft, Award, BarChart3, Check, ChevronDown, Clock3, Dumbbell, HeartHandshake, LockKeyhole, MapPin, Menu, MessageCircle, Phone, ShieldCheck, Sparkles, Star, Target, TimerReset, UserRound, UsersRound, X } from "lucide-react";
+import { ArrowLeft, Award, BarChart3, Check, ChevronDown, Clock3, Dumbbell, HeartHandshake, LockKeyhole, MapPin, Menu, MessageCircle, Phone, ShieldCheck, Sparkles, Target, TimerReset, UserRound, UsersRound, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -23,7 +23,10 @@ function BrandMark({ language }: { language: Language }) {
 }
 
 export default function Home() {
-  const [language, setLanguage] = useState<Language>("ar");
+  const [language, setLanguage] = useState<Language>(() => {
+    if (typeof window === "undefined") return "ar";
+    try { return localStorage.getItem("be-fighter-language") === "en" ? "en" : "ar"; } catch { return "ar"; }
+  });
   const [menuOpen, setMenuOpen] = useState(false);
   const [program, setProgram] = useState("");
   const [area, setArea] = useState("");
@@ -33,9 +36,6 @@ export default function Home() {
   const t = (ar: string, en: string) => language === "ar" ? ar : en;
   const direction = language === "ar" ? "rtl" : "ltr";
 
-  useEffect(() => {
-    try { if (localStorage.getItem("be-fighter-language") === "en") setLanguage("en"); } catch { /* Language switching also works without browser storage. */ }
-  }, []);
 
   useEffect(() => {
     document.documentElement.lang = language;
