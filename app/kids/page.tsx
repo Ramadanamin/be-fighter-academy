@@ -15,8 +15,8 @@ export default function KidsLandingPage(){
  function submit(e:FormEvent){e.preventDefault();window.open(wa(`أهلاً Be Fighter، عايز أعرف البرنامج المناسب لطفلي.\nالاسم: ${name||"-"}\nالعمر: ${age||"-"}\nالمنطقة: ${area||"-"}\nالهدف: ${goal||"-"}`),"_blank","noopener,noreferrer")}
  return <main className={styles.page} dir="rtl">
   <header className={styles.header}>
-   <a href="#top" className={styles.brand}><img src="/media/be-fighter-logo.png" alt="Be Fighter Academy"/></a>
-   <nav className={styles.nav}><a href="#why">ليه برايفت؟</a><a href="#method">طريقة التدريب</a><a href="#evaluation">جلسة التقييم</a><a href="#packages">الباقات</a><a href="#faq">الأسئلة</a></nav>
+   <a href="/" className={styles.brand}><img src="/media/be-fighter-logo.png" alt="Be Fighter Academy"/></a>
+   <nav className={styles.nav}><a href="/">الرئيسية</a><a href="#why">ليه برايفت؟</a><a href="#method">طريقة التدريب</a><a href="#evaluation">جلسة التقييم</a><a href="#packages">الباقات</a><a href="#faq">الأسئلة</a></nav>
    <a className={styles.headerCta} href="#evaluation">احجز جلسة تقييم — 800 جنيه</a>
   </header>
   <section id="top" className={styles.hero}>
@@ -27,7 +27,6 @@ export default function KidsLandingPage(){
     <p>جلسة تقييم فردية لطفلك تساعدنا نفهم مستواه وهدفه وطريقة التدريب الأنسب — ثم نرشح لك البرنامج المناسب، بتكلفة واضحة، وفي <strong>مكانك</strong>.</p>
     <div className={styles.chips}><span>مناسب للمبتدئين</span><span>في البيت أو الجاردن</span><span>متابعة تدريجية</span></div>
     <div className={styles.actions}><a className={styles.primary} href={wa("أهلاً Be Fighter، عايز أعرف البرنامج المناسب لطفلي.")}>احجز جلسة تقييم — 800 جنيه</a><a className={styles.secondary} href="#packages">شوف الباقات بعد التقييم</a></div>
-    
    </div></div>
   </section>
   <section className={styles.strip}><span>ثقة بالنفس</span><span>تركيز أفضل</span><span>انضباط أعلى</span><span>دفاع عن النفس</span><span>لياقة أقوى</span></section>
