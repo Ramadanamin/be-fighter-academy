@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import carouselPrivateBoxing from "../public/media/carousel-private-boxing.jpg";
+import carouselSunsetKickboxing from "../public/media/carousel-sunset-kickboxing.jpg";
+import carouselKidsConfidence from "../public/media/carousel-kids-confidence.jpg";
 
 type Language = "ar" | "en";
 const waNumber = "201001110897";
@@ -137,9 +140,9 @@ useEffect(() => {
   const gardenSlides = [
     [t("الحركة والتكنيك", "MOVEMENT & TECHNIQUE"), t("كل خطوة، باهتمام مدربك.", "Every step, with your coach."), "/media/ramadan-garden-kids.png"],
     [t("التوازن والثقة", "BALANCE & CONFIDENCE"), t("نتعلم ونستمتع بالحركة.", "Learn. Move. Enjoy."), "/media/ramadan-garden-balance.png"],
-    [t("تدريب فردي", "ONE-TO-ONE"), t("تصحيح التكنيك لحظة بلحظة.", "Real-time technique correction."), "/media/carousel-private-boxing.jpg"],
-    [t("كيك بوكسينج", "KICKBOXING"), t("قوة وتكنيك في مكانك.", "Power and technique in your space."), "/media/carousel-sunset-kickboxing.jpg"],
-    [t("ثقة وتشجيع", "CONFIDENCE & SUPPORT"), t("نتعلم ونحتفل بالتقدم.", "Learn, progress and celebrate the wins."), "/media/carousel-kids-confidence.jpg"],
+    [t("تدريب فردي", "ONE-TO-ONE"), t("تصحيح التكنيك لحظة بلحظة.", "Real-time technique correction."), carouselPrivateBoxing.src],
+    [t("كيك بوكسينج", "KICKBOXING"), t("قوة وتكنيك في مكانك.", "Power and technique in your space."), carouselSunsetKickboxing.src],
+    [t("ثقة وتشجيع", "CONFIDENCE & SUPPORT"), t("نتعلم ونحتفل بالتقدم.", "Learn, progress and celebrate the wins."), carouselKidsConfidence.src],
   ];
   const results = [
     [t("ثقة في التصرف", "Confidence in action"), t("نتدرّب على الوقفة والصوت ورد الفعل، مش الضرب بس.", "Practise posture, voice and reactions—not just punches.")],
