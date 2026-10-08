@@ -758,3 +758,174 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.9rem); line-height: 1.35; font-weight: 900
 @media (prefers-reduced-motion: reduce) {
   .garden-slide { transition: none; }
 }
+
+
+/* ===== Unified typography system ===== */
+:root {
+  --bf-text: clamp(1rem, .97rem + .14vw, 1.12rem);
+  --bf-small: clamp(.82rem, .8rem + .08vw, .9rem);
+  --bf-h3: clamp(1.35rem, 1.18rem + .55vw, 1.8rem);
+  --bf-h2: clamp(2.25rem, 1.9rem + 1.35vw, 3.65rem);
+  --bf-h1: clamp(3.15rem, 2.45rem + 2.5vw, 5rem);
+}
+
+body {
+  font-size: var(--bf-text);
+  line-height: 1.75;
+}
+
+main h1,
+main h2,
+main h3 {
+  margin-top: 0;
+  text-wrap: balance;
+  letter-spacing: 0;
+}
+
+main h1 {
+  max-width: 13ch;
+  font-size: var(--bf-h1);
+  line-height: 1.06;
+  font-weight: 900;
+}
+
+main h2 {
+  max-width: 17ch;
+  font-size: var(--bf-h2);
+  line-height: 1.14;
+  font-weight: 900;
+}
+
+main h3 {
+  max-width: 24ch;
+  font-size: var(--bf-h3);
+  line-height: 1.32;
+  font-weight: 800;
+}
+
+main p,
+main li {
+  font-size: var(--bf-text);
+  line-height: 1.82;
+}
+
+.eyebrow,
+.package-label,
+.program-card small,
+.garden-slide figcaption span {
+  font-size: var(--bf-small);
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.hero-copy > p,
+.section-heading p,
+.packages-heading p,
+.private-value-head p,
+.garden-heading p,
+.method-intro p,
+.coach-copy > p,
+.faq-intro p,
+.assessment-copy > p {
+  max-width: 62ch;
+}
+
+.hero-offer {
+  font-size: clamp(1.1rem, 1.02rem + .3vw, 1.35rem);
+  line-height: 1.45;
+}
+
+.section-heading,
+.garden-heading,
+.private-value-head {
+  align-items: end;
+}
+
+.premium-package .price-line b {
+  font-size: clamp(2.85rem, 2.35rem + 1.7vw, 4.25rem);
+  line-height: 1;
+}
+
+.premium-package > strong {
+  font-size: clamp(1.05rem, 1rem + .2vw, 1.2rem);
+  line-height: 1.45;
+}
+
+.private-circle-card {
+  gap: clamp(36px, 5vw, 78px);
+  padding: clamp(30px, 4.5vw, 60px);
+}
+
+.circle-copy h3 {
+  margin-bottom: 22px;
+}
+
+.circle-copy > p,
+.circle-features > p {
+  line-height: 1.9;
+}
+
+.circle-prices {
+  margin-block: 28px;
+}
+
+.kids-home-actions {
+  margin-top: 34px;
+  gap: 16px 24px;
+}
+
+.garden-carousel-stage {
+  height: clamp(390px, 48vw, 640px);
+}
+
+.garden-slide figcaption {
+  max-width: min(680px, 76%);
+}
+
+.garden-slide figcaption b {
+  font-size: clamp(1.65rem, 1.4rem + .9vw, 2.45rem);
+  line-height: 1.16;
+}
+
+@media (max-width: 900px) {
+  .section-heading,
+  .garden-heading,
+  .private-value-head {
+    align-items: start;
+  }
+}
+
+@media (max-width: 560px) {
+  main h1 {
+    max-width: 15ch;
+    font-size: clamp(2.5rem, 11vw, 3.35rem) !important;
+    line-height: 1.08;
+  }
+
+  main h2 {
+    max-width: none;
+    font-size: clamp(2rem, 8.5vw, 2.75rem);
+    line-height: 1.15;
+  }
+
+  main h3 {
+    max-width: none;
+    font-size: clamp(1.3rem, 5.8vw, 1.65rem);
+  }
+
+  main p,
+  main li {
+    font-size: 1rem;
+    line-height: 1.78;
+  }
+
+  .garden-carousel-stage {
+    height: 330px;
+  }
+
+  .garden-slide figcaption {
+    max-width: calc(100% - 92px);
+    inset-inline: 20px;
+    bottom: 22px;
+  }
+}
