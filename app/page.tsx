@@ -135,12 +135,12 @@ useEffect(() => {
     { id: "group", icon: UserRound, label: t("فردي أو مجموعة خاصة", "ONE-TO-ONE OR PRIVATE GROUP"), title: t("الناس اللي تختارهم. في المكان اللي يريحك.", "Your people. Your space. Your training."), description: t("اتدرّب لوحدك أو مع أولادك أو أصحابك. حصص في البيت أو الروف أو الجاردن، باهتمام مباشر من المدرب من غير زحمة جيم أو مجموعة عشوائية.", "Train on your own, with your children or with friends. Get your coach’s direct attention at home, on your rooftop or in your garden—without a crowded gym."), points: [t("تدريب في مكانك الخاص", "Training in your own space"), t("خطة حسب مستوى المتدربين", "A plan matched to the participants"), t("تفاصيل الباقة حسب عددكم ومنطقتكم", "A quote based on your group and location")], cta: t("اطلب تفاصيل المجموعة الخاصة", "Ask about a private group") },
   ];
   const gardenSlides = [
-    [t("تصحيح التكنيك", "TECHNIQUE COACHING"), t("تفاصيل صغيرة بتفرق.", "Small corrections. Better movement.")],
-    [t("ثقة وحركة", "CONFIDENCE & MOVEMENT"), t("نتعلم خطوة بخطوة.", "Build confidence step by step.")],
-    [t("تدريب الأطفال", "KIDS COACHING"), t("تركيز، أمان ومتعة.", "Focus, safety and fun.")],
-    [t("تدريب فردي", "ONE-TO-ONE"), t("كل التركيز عليك.", "Your coach. Your session.")],
-    [t("كيك بوكسينج", "KICKBOXING"), t("قوة وتكنيك في مكانك.", "Power and technique in your space.")],
-    [t("مجموعة خاصة", "PRIVATE GROUP"), t("اتدربوا مع بعض.", "Train together, progress together.")],
+    [t("تصحيح التكنيك", "TECHNIQUE COACHING"), t("تفاصيل صغيرة بتفرق.", "Small corrections. Better movement."), "/media/ramadan-garden-kids.png"],
+    [t("ثقة وحركة", "CONFIDENCE & MOVEMENT"), t("نتعلم خطوة بخطوة.", "Build confidence step by step."), "/media/ramadan-garden-balance.png"],
+    [t("تدريب الأطفال", "KIDS COACHING"), t("تركيز، أمان ومتعة.", "Focus, safety and fun."), "/media/ramadan-garden-kids.png"],
+    [t("تدريب فردي", "ONE-TO-ONE"), t("كل التركيز عليك.", "Your coach. Your session."), "/media/ramadan-fighting-stance.png"],
+    [t("كيك بوكسينج", "KICKBOXING"), t("قوة وتكنيك في مكانك.", "Power and technique in your space."), "/media/hero.png"],
+    [t("مجموعة خاصة", "PRIVATE GROUP"), t("اتدربوا مع بعض.", "Train together, progress together."), "/media/ramadan-garden-balance.png"],
   ];
   const results = [
     [t("ثقة في التصرف", "Confidence in action"), t("نتدرّب على الوقفة والصوت ورد الفعل، مش الضرب بس.", "Practise posture, voice and reactions—not just punches.")],
@@ -239,7 +239,7 @@ useEffect(() => {
         <div className="garden-heading"><div><div className="eyebrow"><span /> {t("تدريب في مساحتكم", "TRAIN IN YOUR OWN SPACE")}</div><h2>{t("الجاردن يبقى", "Your garden.")}<br /><em>{t("مساحة للتقدم.", "Room to grow.")}</em></h2></div><p>{t("في جاردن البيت أو الكمباوند، حصة تجمع الحركة والمهارة واهتمام المدرب. بنراجع الأرضية والمساحة والجو قبل الاتفاق على المكان.", "Movement, skills and focused coaching in your home or compound garden. We review the surface, space and weather before agreeing on your training location.")}</p></div>
         <div className="garden-carousel" onTouchStart={event => setGardenTouchX(event.touches[0]?.clientX ?? null)} onTouchEnd={event => { if (gardenTouchX === null) return; const endX = event.changedTouches[0]?.clientX ?? gardenTouchX; const delta = endX - gardenTouchX; if (Math.abs(delta) > 45) setGardenSlide(current => delta < 0 ? (current + 1) % gardenSlides.length : (current - 1 + gardenSlides.length) % gardenSlides.length); setGardenTouchX(null); }}>
           <div className="garden-carousel-stage">
-            {gardenSlides.map(([label, title], index) => <figure className={`garden-slide ${index === gardenSlide ? "is-active" : ""}`} key={label} aria-hidden={index !== gardenSlide}><div className="garden-slide-image" role="img" aria-label={title} style={{ backgroundPosition: `${(index % 3) * 50}% ${Math.floor(index / 3) * 100}%` }} /><figcaption><span>0{index + 1} / {label}</span><b>{title}</b></figcaption></figure>)}
+            {gardenSlides.map(([label, title, image], index) => <figure className={`garden-slide ${index === gardenSlide ? "is-active" : ""}`} key={label} aria-hidden={index !== gardenSlide}><img className="garden-slide-image" src={image} alt={title} loading={index === 0 ? "eager" : "lazy"} /><figcaption><span>0{index + 1} / {label}</span><b>{title}</b></figcaption></figure>)}
             <button className="garden-control garden-prev" type="button" aria-label={t("الصورة السابقة", "Previous image")} onClick={() => setGardenSlide(current => (current - 1 + gardenSlides.length) % gardenSlides.length)}><ChevronRight aria-hidden="true" /></button>
             <button className="garden-control garden-next" type="button" aria-label={t("الصورة التالية", "Next image")} onClick={() => setGardenSlide(current => (current + 1) % gardenSlides.length)}><ChevronLeft aria-hidden="true" /></button>
           </div>
