@@ -71,7 +71,9 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 .section-dark { background-color: var(--ink); color: var(--white); }
 .section-light { background-color: var(--paper); color: var(--white); }
 h1, h2, h3, p { overflow-wrap: break-word; }
-h2 { margin: 0; font-size: clamp(2.1rem, 3.5vw, 3.45rem); font-weight: 900; line-height: 1.42; letter-spacing: 0; }
+h1, h2, h3 { text-wrap: balance; }
+h2 { margin: 0; font-size: clamp(2.05rem, 3.2vw, 3.2rem); font-weight: 900; line-height: 1.28; letter-spacing: 0; }
+.section-heading h2, .packages-heading h2, .private-value-head h2, .garden-heading h2, .kids-safety-copy h2, .method-intro h2, .coach-copy h2, .faq-intro h2 { max-width: 19ch; }
 h2 em { color: var(--gold); font-style: normal; }
 .eyebrow { display: flex; align-items: center; gap: 11px; margin-bottom: 18px; color: var(--gold); font-size: .875rem; font-weight: 800; }
 .eyebrow span { width: 28px; height: 3px; border-radius: 3px; background: currentColor; }
@@ -91,7 +93,7 @@ h2 em { color: var(--gold); font-style: normal; }
 .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr 1fr; gap: 38px; align-items: center; min-height: 735px; padding-block: 52px 65px; }
 .hero-copy { padding-bottom: 24px; }
 .hero-copy .eyebrow { direction: ltr; justify-content: flex-end; letter-spacing: .06em; }
-.hero h1 { margin: 0; font-size: clamp(3.1rem, 4.8vw, 4.15rem); font-weight: 900; line-height: 1.35; letter-spacing: 0; }
+.hero h1 { margin: 0; max-width: 16ch; font-size: clamp(3rem, 4.5vw, 3.95rem); font-weight: 900; line-height: 1.2; letter-spacing: 0; }
 .hero h1 em { display: inline-block; font-style: normal; background: linear-gradient(110deg, #ffce0a, #ffe76a); color: transparent; background-clip: text; -webkit-background-clip: text; }
 .hero-offer { margin-top: 18px; font-size: 1.45rem; font-weight: 600; color: #e9e9e9; }
 .hero-offer b { color: var(--gold); font-weight: 900; }
@@ -300,7 +302,7 @@ h2 em { color: var(--gold); font-style: normal; }
 
 .booking-section { position: relative; overflow: hidden; padding: 115px 0; border-top: 1px solid #3e3e3e; background: radial-gradient(ellipse at 96% 0, #ffce0a16, transparent 60%), radial-gradient(ellipse at 0 75%, #6f6f6f2a, transparent 56%), #060606; }
 .booking-shell { display: grid; grid-template-columns: 1fr 1fr; gap: 95px; align-items: center; }
-.booking-copy h2 { font-size: clamp(2.5rem, 4.4vw, 4.2rem); }
+.booking-copy h2 { max-width: 17ch; font-size: clamp(2.35rem, 3.8vw, 3.65rem); line-height: 1.22; }
 .booking-copy h2 em { display: block; color: var(--gold); font-style: normal; }
 .booking-copy > p { color: var(--muted-dark); font-size: 1.0625rem; line-height: 1.95; margin: 23px 0 30px; }
 .direct-contact { display: grid; gap: 18px; }
@@ -532,3 +534,31 @@ main[lang="en"] .hero-actions .ghost-button svg { transform: none; }
   .areas-list > span { overflow-wrap: anywhere; }
 }
 .package-terms { color: #a7aca8; font-size: .9rem; line-height: 1.9; margin: 24px 0; }
+
+
+/* Paid child assessment */
+.assessment-section { padding: 105px 0; border-block: 1px solid #2f2f2f; background: radial-gradient(ellipse at 85% 10%, #ffce0a13, transparent 48%), #070909; }
+.assessment-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 80px; align-items: center; }
+.assessment-copy h2 { max-width: 18ch; }
+.assessment-copy h2 em { color: var(--gold); font-style: normal; }
+.assessment-copy > p { max-width: 650px; margin: 22px 0 25px; color: var(--muted-dark); font-size: 1.0625rem; line-height: 1.95; }
+.assessment-list { display: grid; gap: 14px; margin: 0 0 30px; padding: 0; list-style: none; }
+.assessment-list li { display: flex; align-items: flex-start; gap: 10px; color: #eeeeee; font-size: 1rem; line-height: 1.75; }
+.assessment-list svg { width: 19px; height: 19px; margin-top: 5px; color: var(--gold); flex: 0 0 auto; }
+.assessment-card { padding: 34px; border: 1px solid #ffce0a70; border-radius: 24px; background: linear-gradient(145deg, #151b1d, #0d1112); box-shadow: 0 26px 70px #0006; }
+.assessment-card-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 22px; border-bottom: 1px solid #ffffff18; }
+.assessment-card-head > strong { font-size: 1.2rem; font-weight: 900; }
+.assessment-price { display: flex; align-items: baseline; gap: 8px; direction: ltr; color: var(--gold); }
+.assessment-price b { font-family: Arial Black, Arial, sans-serif; font-size: clamp(2.4rem, 4vw, 3.5rem); line-height: 1; }
+.assessment-price span { font-size: .8rem; font-weight: 900; }
+.assessment-card > p { margin: 22px 0; color: #c1c7c9; line-height: 1.9; }
+.payment-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.payment-option { min-height: 88px; padding: 16px; border: 1px solid #3b4548; border-radius: 14px; background: #111719; display: grid; align-content: center; gap: 6px; }
+.payment-option small { color: var(--gold); font-weight: 900; }
+.payment-option b { color: #f4f4f4; font-size: .95rem; overflow-wrap: anywhere; }
+.assessment-receipt { display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 58px; margin-top: 14px; padding: 12px 18px; border: 1px solid #1b8190; border-radius: 14px; background: #08232a; color: #f8f8f8; font-weight: 900; text-align: center; transition: border-color .2s, background .2s, color .2s; }
+.assessment-receipt svg { width: 20px; height: 20px; }
+.assessment-note { display: block; margin-top: 15px; color: #9ba4a7; text-align: center; line-height: 1.7; }
+@media (hover: hover) { .assessment-receipt:hover { background: var(--blue); border-color: var(--blue); color: #050609; } }
+@media (max-width: 900px) { .assessment-grid { grid-template-columns: 1fr; gap: 42px; } }
+@media (max-width: 560px) { .assessment-section { padding: 72px 0; } .assessment-card { padding: 26px 20px; } .assessment-card-head { align-items: flex-start; } .payment-options { grid-template-columns: 1fr; } .assessment-copy h2 { max-width: none; } }
