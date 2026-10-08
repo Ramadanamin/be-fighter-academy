@@ -41,7 +41,7 @@ export default function Home() {
 
   
   useEffect(() => {
-    const timer = window.setInterval(() => setGardenSlide(current => (current + 1) % 6), 4300);
+    const timer = window.setInterval(() => setGardenSlide(current => (current + 1) % 2), 4300);
     return () => window.clearInterval(timer);
   }, []);
 
@@ -135,12 +135,8 @@ useEffect(() => {
     { id: "group", icon: UserRound, label: t("فردي أو مجموعة خاصة", "ONE-TO-ONE OR PRIVATE GROUP"), title: t("الناس اللي تختارهم. في المكان اللي يريحك.", "Your people. Your space. Your training."), description: t("اتدرّب لوحدك أو مع أولادك أو أصحابك. حصص في البيت أو الروف أو الجاردن، باهتمام مباشر من المدرب من غير زحمة جيم أو مجموعة عشوائية.", "Train on your own, with your children or with friends. Get your coach’s direct attention at home, on your rooftop or in your garden—without a crowded gym."), points: [t("تدريب في مكانك الخاص", "Training in your own space"), t("خطة حسب مستوى المتدربين", "A plan matched to the participants"), t("تفاصيل الباقة حسب عددكم ومنطقتكم", "A quote based on your group and location")], cta: t("اطلب تفاصيل المجموعة الخاصة", "Ask about a private group") },
   ];
   const gardenSlides = [
-    [t("تصحيح التكنيك", "TECHNIQUE COACHING"), t("تفاصيل صغيرة بتفرق.", "Small corrections. Better movement."), "/media/ramadan-garden-kids.png"],
-    [t("ثقة وحركة", "CONFIDENCE & MOVEMENT"), t("نتعلم خطوة بخطوة.", "Build confidence step by step."), "/media/ramadan-garden-balance.png"],
-    [t("تدريب الأطفال", "KIDS COACHING"), t("تركيز، أمان ومتعة.", "Focus, safety and fun."), "/media/ramadan-garden-kids.png"],
-    [t("تدريب فردي", "ONE-TO-ONE"), t("كل التركيز عليك.", "Your coach. Your session."), "/media/ramadan-fighting-stance.png"],
-    [t("كيك بوكسينج", "KICKBOXING"), t("قوة وتكنيك في مكانك.", "Power and technique in your space."), "/media/hero.png"],
-    [t("مجموعة خاصة", "PRIVATE GROUP"), t("اتدربوا مع بعض.", "Train together, progress together."), "/media/ramadan-garden-balance.png"],
+    [t("الحركة والتكنيك", "MOVEMENT & TECHNIQUE"), t("كل خطوة، باهتمام مدربك.", "Every step, with your coach."), "/media/ramadan-garden-kids.png"],
+    [t("التوازن والثقة", "BALANCE & CONFIDENCE"), t("نتعلم ونستمتع بالحركة.", "Learn. Move. Enjoy."), "/media/ramadan-garden-balance.png"],
   ];
   const results = [
     [t("ثقة في التصرف", "Confidence in action"), t("نتدرّب على الوقفة والصوت ورد الفعل، مش الضرب بس.", "Practise posture, voice and reactions—not just punches.")],
