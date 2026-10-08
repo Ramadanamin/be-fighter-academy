@@ -41,7 +41,7 @@ export default function Home() {
 
   
   useEffect(() => {
-    const timer = window.setInterval(() => setGardenSlide(current => (current + 1) % 2), 4300);
+    const timer = window.setInterval(() => setGardenSlide(current => (current + 1) % gardenSlides.length), 4300);
     return () => window.clearInterval(timer);
   }, []);
 
@@ -137,6 +137,9 @@ useEffect(() => {
   const gardenSlides = [
     [t("الحركة والتكنيك", "MOVEMENT & TECHNIQUE"), t("كل خطوة، باهتمام مدربك.", "Every step, with your coach."), "/media/ramadan-garden-kids.png"],
     [t("التوازن والثقة", "BALANCE & CONFIDENCE"), t("نتعلم ونستمتع بالحركة.", "Learn. Move. Enjoy."), "/media/ramadan-garden-balance.png"],
+    [t("تدريب فردي", "ONE-TO-ONE"), t("تصحيح التكنيك لحظة بلحظة.", "Real-time technique correction."), "/media/carousel-private-boxing.webp"],
+    [t("كيك بوكسينج", "KICKBOXING"), t("قوة وتكنيك في مكانك.", "Power and technique in your space."), "/media/carousel-sunset-kickboxing.webp"],
+    [t("ثقة وتشجيع", "CONFIDENCE & SUPPORT"), t("نتعلم ونحتفل بالتقدم.", "Learn, progress and celebrate the wins."), "/media/carousel-kids-confidence.webp"],
   ];
   const results = [
     [t("ثقة في التصرف", "Confidence in action"), t("نتدرّب على الوقفة والصوت ورد الفعل، مش الضرب بس.", "Practise posture, voice and reactions—not just punches.")],
